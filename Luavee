@@ -1,0 +1,85 @@
+-- Roblox Script Hub Loader Template
+
+local ScreenGui = Instance.new("ScreenGui")
+local MainFrame = Instance.new("Frame")
+local Title = Instance.new("TextLabel")
+local Container = Instance.new("ScrollingFrame")
+local UIListLayout = Instance.new("UIListLayout")
+
+-- Setup Main Screen GUI
+ScreenGui.Name = "CustomScriptHub"
+ScreenGui.Parent = game:GetService("CoreGui") or game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+
+-- Setup Main Frame
+MainFrame.Name = "MainFrame"
+MainFrame.Parent = ScreenGui
+MainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+MainFrame.BorderSizePixel = 0
+MainFrame.Position = UDim2.new(0.3, 0, 0.25, 0)
+MainFrame.Size = UDim2.new(0, 320, 0, 380)
+MainFrame.Active = true
+MainFrame.Draggable = true
+
+-- Setup Title Bar
+Title.Name = "Title"
+Title.Parent = MainFrame
+Title.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+Title.Size = UDim2.new(1, 0, 0, 40)
+Title.Font = Enum.Font.SourceSansBold
+Title.Text = "VEE HUB LOADER"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextSize = 18.000
+
+-- Setup Scrolling Container
+Container.Name = "Container"
+Container.Parent = MainFrame
+Container.BackgroundTransparency = 1.000
+Container.Position = UDim2.new(0, 10, 0, 50)
+Container.Size = UDim2.new(1, -20, 1, -60)
+Container.CanvasSize = UDim2.new(0, 0, 2, 0)
+Container.ScrollBarThickness = 6
+
+UIListLayout.Parent = Container
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+UIListLayout.Padding = UDim me and UDim.new(0, 8)
+
+-- Helper Function to Create Buttons
+local function CreateButton(btnText, callback)
+    local TextButton = Instance.new("TextButton")
+    TextButton.Parent = Container
+    TextButton.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+    TextButton.Size = UDim2.new(1, 0, 0, 35)
+    TextButton.Font = Enum.Font.SourceSans
+    TextButton.Text = btnText
+    TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    TextButton.TextSize = 15.000
+    
+    TextButton.MouseButton1Click:Connect(function()
+        pcall(callback)
+    end)
+end
+
+-- ==================== SCRIPT BUTTONS ====================
+
+-- 1. Yatta's Crazy GUI Script
+CreateButton("Load Yatta's Crazy GUI", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/BluuGuy-Sure/Yatta-s-AI-GUI-stupid/main/Main.lua"))()
+end)
+
+-- 2. General Auto Farm Template
+CreateButton("Run Auto Farm", function()
+    _G.AutoFarm = not _G.AutoFarm
+    print("Auto Farm set to:", _G.AutoFarm)
+    
+    task.spawn(function()
+        while _G.AutoFarm do
+            task.wait(0.5)
+            -- Insert specific game farm logic or remote call here
+        end
+    end)
+end)
+
+-- 3. Universal Utility (Infinite Yield)
+CreateButton("Load Infinite Yield Admin", function()
+    loadstring(game:HttpGet("https://githubusercontent.com"))()
+end)
